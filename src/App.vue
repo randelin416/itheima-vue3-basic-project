@@ -17,7 +17,13 @@ const getList = async() => {
 onMounted(() => getList())
 
 // TODO: 删除功能
+// 思路：獲取當前行的id -> 通過id調用刪除接口 -> 更新最新的列表
 
+const onDelete = async (id) => {
+  console.log(id)
+  axios.delete(`/del/${id}`)
+  getList()
+}
 // TODO: 编辑功能
 
 </script>
