@@ -14,10 +14,9 @@ const getList = async() => {
   // 交給list
   list.value = res.data
 }
-
 onMounted(() => getList())
-// TODO: 删除功能
 
+// TODO: 删除功能
 
 // TODO: 编辑功能
 
@@ -36,9 +35,9 @@ onMounted(() => getList())
       <el-table-column label="姓名" prop="name" width="150"></el-table-column>
       <el-table-column label="籍贯" prop="place"></el-table-column>
       <el-table-column label="操作" width="150">
-        <template #default>
+        <template #default="{ row }">
           <el-button type="primary" link>编辑</el-button>
-          <el-button type="danger" link>删除</el-button>
+          <el-button type="danger" @click="onDelete(row.id)" link>删除</el-button>
         </template>
       </el-table-column>
     </el-table>
