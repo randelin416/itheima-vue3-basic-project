@@ -25,6 +25,14 @@ const onDelete = async (id) => {
   getList()
 }
 // TODO: 编辑功能
+// 思路：打開彈框 -> 回填資料 -> 更新資料
+
+// 1. 打開彈框(獲取子組件實例 調用方法或修改屬性[連接到template中的</Ediit>])
+// 2. 回調資料(調用詳情接口 / 當前行的靜態數據)
+const editRef = ref(null)
+const onEdit = (row) => {
+  editRef.value.open(row)
+}
 
 </script>
 
@@ -42,13 +50,13 @@ const onDelete = async (id) => {
       <el-table-column label="籍贯" prop="place"></el-table-column>
       <el-table-column label="操作" width="150">
         <template #default="{ row }">
-          <el-button type="primary" link>编辑</el-button>
+          <el-button type="primary" @click="onEdit(row)" link>编辑</el-button>
           <el-button type="danger" @click="onDelete(row.id)" link>删除</el-button>
         </template>
       </el-table-column>
     </el-table>
   </div>
-  <Edit />
+  <Edit ref="editRef" @on-update="getList" />
 </template>
 
 <style scoped>
